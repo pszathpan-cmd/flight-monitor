@@ -8,6 +8,19 @@
 - 🔔 价格低于阈值时自动发送飞书通知
 - 📊 记录历史价格，方便查看走势
 - ⏰ 可设置定时任务每小时自动检查
+- 🕐 出发时间筛选（9:00-16:00）
+- 🛫 机型筛选（大机型/宽体机）
+
+## 最新查询结果
+
+**2026-05-10 成都(CTU) → 上海(SHA)**
+
+| 票价类型 | 价格 |
+|--------|------|
+| 票价（机建税前）| ¥550 |
+| 总价（含机建）| ¥830 |
+
+> ⚠️ 详细航班时间和机型暂不可用（携程需要登录），请手动确认是否符合要求
 
 ## 使用方法
 
@@ -39,14 +52,21 @@ CONFIG = {
     "arr_city_name": "上海",
     "date": "2026-05-10",    # 出发日期
     "price_threshold": 700,   # 价格阈值
+    "dep_time_start": "09:00",   # 最早出发时间
+    "dep_time_end": "16:00",     # 最晚出发时间
+    "large_aircraft_only": True,  # 只看大机型
 }
 ```
+
+## 大机型说明
+
+宽体机列表（A330/A350/B777/B787 等），乘坐更舒适。
 
 ## 部署定时任务
 
 ```bash
 # 每小时检查一次
-0 * * * * cd /root/.openclaw/workspace/flight_monitor && python3 flight_monitor.py
+0 * * * * cd /root/.openclaw/workspace/flight_monitor && python3 flight_monitor.py >> /tmp/flight_monitor.log 2>&1
 ```
 
 ## 航线查询
